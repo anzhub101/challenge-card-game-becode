@@ -22,26 +22,28 @@ class Deck:
         random.shuffle(self.cards)
 
     def distribute(self):
-        if self.no_of_players/2 == 0:
+        if 52 % self.no_of_players == 0:
             cards_per_person = 52/self.no_of_players
-            for i in range(0, 51):
-                for j in range(0, cards_per_person - 1):
-                    self.player_hands.append(self.cards[i][j])
-                    j += 1
+            x=0
+            for i in range(0, self.no_of_players-1):
+                for j in range(x, x + cards_per_person - 1):
+                    self.player_hands.append(self.cards[j])
                 self.hands.append(self.player_hands)
+                x+=cards_per_person
         else:
             remainder = 52 % self.no_of_players
             print(f'Since you are an odd no. of players, the first {remainder} of you will get an extra card')
             cards_per_person = 52 / self.no_of_players
             cards_per_person = int(cards_per_person)
-            for i in range(0, 51-remainder):
-                for j in range(0, cards_per_person - 1):
-                    self.player_hands.append(self.cards[i][j])
-                    j += 1
+            x = 0
+            for i in range(0, self.no_of_players - 1):
+                for j in range(x, x + cards_per_person - 1):
+                    self.player_hands.append(self.cards[j])
                 self.hands.append(self.player_hands)
+                x += cards_per_person
             j = 0
             for i in range(51-remainder, 51):
-                self.player_hands[j].append(self.cards[i][i])
+                self.player_hands[j].append(self.cards[i])
                 j += 1
 
     def player_profile(self):
@@ -54,25 +56,32 @@ class Deck:
 
 class Player(Deck):
 
-    def __int__(self, player_name):
+    def __int__(self):
 
         self.card = []
         self.turn_count = 0
         self.number_of_cards = 0
-        self.player_name = player_name
+        self.player_name = ''
         self.history = []
         Deck.__init__(self, no_of_players)
 
     def play(self):
         rand_card = []
+        List_of_players = []
+        j = 0
         for i in self.hands:
-            for j in self.hands:
-                if self.player_list[i][j] == self.player_name:
-                    self.card = self.hands[i][j]
-                    rand_card = self.card[random.randint(0, len(self.card))]
-                    self.history.append(rand_card)
-                    self.card.remove(rand_card)
-                    print(f'{self.player_name} {self.turn_count} played:{rand_card}')
+            self.player_name = self.player_list[j]
+            self.card = i
+            for cards in self.card:
+                rand_card = self.card[random.randint(0, len(self.card))]
+                self.history.append(rand_card)
+                self.card.remove(rand_card)
+                print(f'{self.player_name} is playing his {self.turn_count} turn. His active cards are {self.card} and the card he played is:{rand_card}/n'
+                      f'These are the cards he has left to play {len(self.history)}')
+                self.turn_count += 1
+            a= [self.player_name, self.turn_count, self.history, self.number_of_cards]
+            List_of_players.append(a)
+            j+=1
 
         return rand_card
 
