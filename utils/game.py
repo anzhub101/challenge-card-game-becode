@@ -1,23 +1,25 @@
+from player import Player
 from player import Deck
 
 class Board:
-    def __init__(self, players, turn_count, active_cards, history_cards):
-        self.players=Player[]
-        self.turn_count=turn_count
-        self.active_cards=Player.history[Player.history.len()-1]
-        self.history_cards=Player.history[:Player.history.len()-2]
+    def __init__(self, players, active_cards, history_cards):
+        self.players=players
+        self.turn_count=[]
+        self.active_cards=active_cards
+        self.history_cards=history_cards
 
     def start_game(self):
-        new_deck=Deck()
+        print("Hey hey hey!! welcome to my cool card game!! how many players would you like to play with??")
+        new_deck=Deck(int(input()))
         new_deck.fill_deck()
+        new_deck.shuffle()
+        new_deck.player_profile()
         new_deck.distribute()
-        i=0
-        for crds in Player[i].cards:
-            Player[i].play()
-            print(f'the turn count is ({Player[i].turn_count}' )
-            i+=1
-            Player[i].turn_count+=1
-            print(f'The active cards are {Player.card} and all the cards played in the past are {Player.history}')
+
+            print(f'the turn count is ({.turn_count[i]}' )
+            turn_count[i]+=1
+        i+=1
+            print(f'The active cards are {} and all the cards played in the past are {}')
 
 
 
