@@ -8,7 +8,7 @@ You will be asked to enter the number of players and then the name of each of th
 ## Installation
 
 You don't really need anyhting! Just fork the repository to get the code and try it out for yourself!
-```
+
 
 ## Usage
 
